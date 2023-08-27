@@ -1,15 +1,21 @@
 const http = require('http');
 const url = require('url');
 
-
 const port = 3000;
+const maxHistorySize = 20;
+const history = [];
 
 const server = http.createServer(function(req, res) {
     const parsedUrl = url.parse(req.url, true);
-    const pathSegments = parsedUrl.pathname.split('/'); // Split the path into segments
+    const pathSegments = parsedUrl.pathname.split('/');
 
-    if (pathSegments.length >= 4 && pathSegments.length % 2 === 0) {
-        
+    if (pathSegments[1] === 'history') {
+        // Handle the /history endpoint
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        const historyList = history.map(entry => `Operation: ${entry.operation}, Result: ${entry.result}`).join('<br>');
+        res.write(`Last 20 operations:<br>${historyList}`);
+        res.end();
+    } else if (pathSegments.length >= 4 && pathSegments.length % 2 === 0) {
         let result = "";
         result += parseFloat(pathSegments[1]);
 
@@ -25,7 +31,6 @@ const server = http.createServer(function(req, res) {
                     result += `-` + `${num}`;
                     break;
                 case 'into':
-
                     result += `*` + `${num}`;
                     break;
                 case 'divide':
@@ -48,6 +53,12 @@ const server = http.createServer(function(req, res) {
 
         const evaluate = eval(result);
 
+        // Add the operation and result to the history
+        history.unshift({ operation: result, result: evaluate });
+        if (history.length > maxHistorySize) {
+            history.pop();
+        }
+
         res.writeHead(200, { 'Content-Type': 'text/html' });
         res.write(`Question: ${result}   Result: ${evaluate}`);
         res.end();
@@ -65,6 +76,3 @@ server.listen(port, function(error) {
         console.log('Server is listening on port ' + port);
     }
 });
-
-
-
