@@ -1,0 +1,54 @@
+[
+    {
+        "operation": "3*5+8*6",
+        "result": 63
+    },
+    {
+        "operation": "6+67",
+        "result": 73
+    },
+    {
+        "operation": "6+12",
+        "result": 18
+    },
+    {
+        "operation": "6+12",
+        "result": 18
+    },
+    {
+        "operation": "6+55",
+        "result": 61
+    },
+    {
+        "operation": "6+4",
+        "result": 10
+    },
+    {
+        "operation": "3*5+8*1212",
+        "result": 9711
+    },
+    {
+        "operation": "3*5+8*6",
+        "result": 63
+    },
+    {
+        "operation": "3*5+8*13212",
+        "result": 105711
+    },
+    {
+        "operation": "3*5+8*6",
+        "result": 63
+    },
+    {
+        "operation": "3*5+8*6",
+        "result": 63
+    },
+    {
+        "operation": "3*5+8*823",
+        "result": 6599
+    },
+    {
+        "operation": "3*5+8*89",
+        "result": 727
+    }
+]
